@@ -15,8 +15,8 @@ usersshkey=Put.gibberish.ssh.key.here!
 # Turn whole disk into one volume group
 # with four logical volumes: boot, system, data and swap
 # all of which are formattet as ext4 or swap respectively
-sfdisk --delete /dev/$hdd		# Remove old partition
-
+dd if=/dev/zero of=/dev/$hdd bs=2048 count=1
+# sfdisk --delete /dev/$hdd		# Remove old partition
 echo ",,8e"|sfdisk /dev/$hdd
 pvcreate /dev/"$hdd"1
 vgcreate marvin /dev/"$hdd"1
