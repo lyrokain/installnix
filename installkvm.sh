@@ -9,29 +9,35 @@ username=genericuser
 userpassword=somesecretpassword.Change.this!
 usersshkey=Put.gibberish.ssh.key.here!
 
+# Insert code here to query user input for variables above
+
 # Partitioning
 # Turn whole disk into one volume group
 # with four logical volumes: boot, system, data and swap
 # all of which are formattet as ext4 or swap respectively
+sfdisk --delete /dev/$hdd		# Remove old partition
 
 echo ",,8e"|sfdisk /dev/$hdd
 pvcreate /dev/"$hdd"1
 vgcreate marvin /dev/"$hdd"1
 
-lvcreate -L 5G -n boot marvin
+lvcreate -L 1G -n boot marvin # Debugging size. For production use 5G
 mkfs.ext4 -F /dev/marvin/boot
-e2label /dev/marvin/boot boot
+tune2fs -f -L boot /dev/marvin/boot 
 
-lvcreate -L 15G -n system marvin
+lvcreate -L 5G -n system marvin # Debugging size. For production use 16G
 mkfs.ext4 -F /dev/marvin/system
-e2label /dev/marvin/system system
+tune2fs -f -L system /dev/marvin/system 
 
-lvcreate -L 100G -n data marvin
+lvcreate -L 8G -n data marvin # Debugging size. For production use 100G
 mkfs.ext4 -F /dev/marvin/data
-e2label /dev/marvin/data data
+tune2fs -f -L data /dev/marvin/data 
 
-lvcreate -L 8G -n swap marvin
+lvcreate -L 500M -n swap marvin
 mkswap /dev/marvin/swap
+
+# For debugging exit here.
+exit
 
 # Mounting
 mount -L system /mnt
