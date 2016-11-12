@@ -19,6 +19,10 @@ function createvolume {
 	tune2fs -f -L $label /dev/$vmname/$label 
 }
 
+# Remove existing volume group
+groupname=$(vgdisplay|grep "VG Name"|cut -b 25-)
+vgremove -f $groupname
+
 # Remove old partition:
 sfdisk --delete /dev/$hdd
 
