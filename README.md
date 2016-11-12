@@ -1,16 +1,6 @@
-=============================================================================
-======      This took is under developent and far from functional      ======
-=============================================================================
-                                                                             
- mmmm                                 m                                  m   
- #   "m  mmm          m mm    mmm   mm#mm         m   m   mmm    mmm     #   
- #    # #" "#         #"  #  #" "#    #           #   #  #   "  #"  #    #   
- #    # #   #         #   #  #   #    #           #   #   """m  #""""    "   
- #mmm"  "#m#"         #   #  "#m#"    "mm         "mm"#  "mmm"  "#mm"    #   
-                                                                             
-=============================================================================
-======      This took is under developent and far from functional      ======
-=============================================================================
+=====================================================
+This tool is under developent and far from functional
+=====================================================
 
 This is going to be an install script to automatically install a copy of NixOS. You will need to boot a machine using an ISO-Image of NixOS for this to work. 
 
