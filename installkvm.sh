@@ -19,15 +19,15 @@ pvcreate /dev/"$hdd"1
 vgcreate marvin /dev/"$hdd"1
 
 lvcreate -L 5G -n boot marvin
-mkfs.ext4 /dev/marvin/boot
+mkfs.ext4 -F /dev/marvin/boot
 e2label /dev/marvin/boot boot
 
 lvcreate -L 15G -n system marvin
-mkfs.ext4 /dev/marvin/system
+mkfs.ext4 -F /dev/marvin/system
 e2label /dev/marvin/system system
 
 lvcreate -L 100G -n data marvin
-mkfs.ext4 /dev/marvin/data
+mkfs.ext4 -F /dev/marvin/data
 e2label /dev/marvin/data data
 
 lvcreate -L 8G -n swap marvin
