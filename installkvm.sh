@@ -3,38 +3,42 @@
 
 # Global Settings
 
+vmname=marvin
 hdd=sda
 rootpassword=somesupersecretpassword.Change.this.right.now!
 username=genericuser
 userpassword=somesecretpassword.Change.this!
 usersshkey=Put.gibberish.ssh.key.here!
 
-# Insert code here to query user input for variables above
+# Functions
+function createvolume {
+	label=$1
+	size=$2
+	lvcreate -L $size -n $label $vmname
+	mkfs.ext4 -F /dev/$vmname/$label
+	tune2fs -f -L $label /dev/$vmname/$label 
+}
 
-# Partitioning
-# Turn whole disk into one volume group
-# with four logical volumes: boot, system, data and swap
-# all of which are formattet as ext4 or swap respectively
-sfdisk --delete /dev/$hdd		# Remove old partition
+# Remove old partition:
+sfdisk --delete /dev/$hdd
+
+# For good measure nuke mbr:
 dd if=/dev/zero of=/dev/$hdd bs=512 count=1
-# echo ",,8e"|sfdisk /dev/$hdd
+
+# Create physical volume:
 pvcreate /dev/$hdd
-vgcreate marvin /dev/$hdd
 
-lvcreate -L 1G -n boot marvin # Debugging size. For production use 5G
-mkfs.ext4 -F /dev/marvin/boot
-tune2fs -f -L boot /dev/marvin/boot 
+# Create volume group
+vgcreate $vmname /dev/$hdd
 
-lvcreate -L 5G -n system marvin # Debugging size. For production use 16G
-mkfs.ext4 -F /dev/marvin/system
-tune2fs -f -L system /dev/marvin/system 
+# Create logical volumes and file systems
+createvolume boot 1G
+createvolume system 5G
+createvolume data 10G
 
-lvcreate -L 8G -n data marvin # Debugging size. For production use 100G
-mkfs.ext4 -F /dev/marvin/data
-tune2fs -f -L data /dev/marvin/data 
-
-lvcreate -L 500M -n swap marvin
-mkswap /dev/marvin/swap
+# Create swap space
+lvcreate -L 500M -n swap $vmname
+mkswap -L swap /dev/$vmname/swap
 
 # For debugging exit here.
 exit
@@ -78,9 +82,9 @@ cat << EOF > /mnt/etc/nixos/configuration.nix
       label="data";
     }
   ];
-  swapDevices = [ { device = "/dev/marvin/swap"; } ];
+  swapDevices = [ { device = "/dev/$vmname/swap"; } ];
 
-  networking.hostName = "marvin"; # Define your hostname.
+  networking.hostName = "$vmname"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties.
@@ -143,3 +147,4 @@ cat << EOF > /mnt/etc/nixos/configuration.nix
 EOF
 
 # nixos-install
+
