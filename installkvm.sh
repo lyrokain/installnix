@@ -1,6 +1,6 @@
 # Hypervisor:
 # NixOS-System mit KVM
-#
+
 # Global Settings
 
 hdd=sda
