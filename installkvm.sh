@@ -15,8 +15,8 @@ usersshkey=Put.gibberish.ssh.key.here!
 # all of which are formattet as ext4 or swap respectively
 
 echo ",,8e"|sfdisk /dev/$hdd
-pvcreate /dev/$hdd1
-vgcreate marvin /dev/$hdd1
+pvcreate /dev/"$hdd"1
+vgcreate marvin /dev/"$hdd"1
 
 lvcreate -L 5G -n boot marvin
 mkfs.ext4 /dev/marvin/boot
@@ -42,7 +42,7 @@ mount -L boot /mnt/boot
 # Generate config from basic NixOS installation on boot media 
 nixos-generate-config --root /mnt
 
-# Overwrite configuration.nix witch custom version
+# Overwrite configuration.nix with custom version
 cat << EOF > /mnt/etc/nixos/configuration.nix
 
 # Edit this configuration file to define what should be installed on
@@ -135,3 +135,5 @@ cat << EOF > /mnt/etc/nixos/configuration.nix
 }
 
 EOF
+
+# nixos-install
