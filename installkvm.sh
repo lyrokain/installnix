@@ -26,7 +26,7 @@ createvolume(){
 	mkfs.ext4 -F /dev/$group/$name
 	echo "Setting file system label to $name:"
 	tune2fs -f -L $name /dev/$group/$name
-	vgdisplay
+	lvdisplay $name
 }
 
 # Remove existing volume groups
