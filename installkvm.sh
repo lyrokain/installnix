@@ -17,9 +17,12 @@
 
 # Functions
 function createvolume {
-	lvcreate -L $2 -n $1 $3
-	mkfs.ext4 -F /dev/$3/$1
-	tune2fs -f -L $1 /dev/$3/$1 
+	local name=$1
+	local size=$2
+	local group=$3
+	lvcreate -L $size -n $name $group
+	mkfs.ext4 -F /dev/$group/$name
+	tune2fs -f -L $name /dev/$group/$name 
 }
 
 # Remove existing volume groups
