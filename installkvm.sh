@@ -17,8 +17,6 @@
 
 # Functions
 function createvolume {
-	label=$1
-	size=$2
 	lvcreate -L $2 -n $1 $3
 	mkfs.ext4 -F /dev/$3/$1
 	tune2fs -f -L $1 /dev/$3/$1 
@@ -44,9 +42,9 @@ pvcreate /dev/$hdd
 vgcreate $vmname /dev/$hdd
 
 # Create logical volumes and file systems
-createvolume boot 1G $vmname
-createvolume system 5G $vmname
-createvolume data 10G $vmname
+createvolume boot "1G" "$vmname"
+createvolume system "5G" "$vmname"
+createvolume data "10G" "$vmname"
 
 # Create swap space
 lvcreate -L 500M -n swap $vmname
