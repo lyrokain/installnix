@@ -3,12 +3,17 @@
 
 # Global Settings
 
-vmname=marvin
-hdd=sda
-rootpassword=somesupersecretpassword.Change.this.right.now!
-username=genericuser
-userpassword=somesecretpassword.Change.this!
-usersshkey=Put.gibberish.ssh.key.here!
+	vmname=marvin
+	hdd=sda
+	rootpassword=somesupersecretpassword.Change.this.right.now!
+	username=genericuser
+	userpassword=somesecretpassword.Change.this!
+	usersshkey=Put.gibberish.ssh.key.here!
+
+#read -p "What will be the name of this machine:" vmname
+#read -p "Device path of destination drive (i. e. /dev/sda):" hdd
+#read -p "Name of user account to create:" username
+#read -p "Password of $username:" userpassword
 
 # Functions
 function createvolume {
@@ -19,14 +24,17 @@ function createvolume {
 	tune2fs -f -L $label /dev/$vmname/$label 
 }
 
-# Remove existing volume group
+# Remove existing volume groups
 groupname=$(vgdisplay|grep "VG Name"|cut -b 25-)
-vgremove -f $groupname
+for i in $groupname; do vgremove -f $i; done
+
+# Remove existing physical volume
+pvremove /dev/$hdd
 
 # Remove old partition:
 sfdisk --delete /dev/$hdd
 
-# For good measure nuke mbr:
+# For good measure:
 dd if=/dev/zero of=/dev/$hdd bs=512 count=1
 
 # Create physical volume:
