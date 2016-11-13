@@ -20,9 +20,13 @@ function createvolume {
 	local name=$1
 	local size=$2
 	local group=$3
+	echo "Creating logical volume $name of $size on $group:"
 	lvcreate -L $size -n $name $group
+	echo "Formatting /dev/$group/$name"
 	mkfs.ext4 -F /dev/$group/$name
-	tune2fs -f -L $name /dev/$group/$name 
+	echo "Setting file system label to $name:"
+	tune2fs -f -L $name /dev/$group/$name
+	vgdisplay
 }
 
 # Remove existing volume groups
