@@ -21,7 +21,7 @@ createvolume(){
 	local size=$2
 	local group=$3
 	echo "Creating logical volume $name of $size on $group:"
-	lvcreate -L $size -n $name $group
+	yes|lvcreate -L $size -n $name $group
 	echo "Formatting /dev/$group/$name"
 	mkfs.ext4 -F /dev/$group/$name
 	echo "Setting file system label to $name:"
@@ -49,9 +49,9 @@ pvcreate /dev/$hdd
 vgcreate $vmname /dev/$hdd
 
 # Create logical volumes and file systems
-createvolume boot 1G marvin
-createvolume system 5G marvin
-createvolume data 10G marvin
+createvolume boot "1G" "$vmname"
+createvolume system "5G" "$vmname"
+createvolume data "10G" "$vmname"
 
 # Create swap space
 lvcreate -L 500M -n swap $vmname
