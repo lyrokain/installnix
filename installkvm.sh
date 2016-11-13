@@ -1,5 +1,6 @@
 # Hypervisor:
 # NixOS-System mit KVM
+# Version 0.01
 
 # Global Settings
 
