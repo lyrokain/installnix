@@ -42,9 +42,9 @@ pvcreate /dev/$hdd
 vgcreate $vmname /dev/$hdd
 
 # Create logical volumes and file systems
-createvolume boot "1G" "$vmname"
-createvolume system "5G" "$vmname"
-createvolume data "10G" "$vmname"
+createvolume boot 1G marvin
+createvolume system 5G marvin
+createvolume data 10G marvin
 
 # Create swap space
 lvcreate -L 500M -n swap $vmname
