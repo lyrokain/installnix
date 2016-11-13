@@ -27,7 +27,7 @@ createvolume(){
 	mkfs.ext4 -F /dev/$group/$name
 	echo "Setting file system label to $name:"
 	tune2fs -f -L $name /dev/$group/$name
-	lvdisplay /dev/$group/$name
+	exho "Volume /dev/$group/$name ready." 
 }
 
 # Remove existing volume groups
@@ -59,7 +59,7 @@ lvcreate -L 500M -n swap $vmname
 mkswap -f -L swap /dev/$vmname/swap
 
 # For debugging exit here.
-exit
+# exit
 
 # Mounting
 mount -L system /mnt
