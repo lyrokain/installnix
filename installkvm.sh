@@ -16,7 +16,7 @@
 #read -p "Password of $username:" userpassword
 
 # Functions
-function createvolume(){
+createvolume(){
 	local name=$1
 	local size=$2
 	local group=$3
