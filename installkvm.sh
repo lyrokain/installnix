@@ -55,7 +55,7 @@ createvolume data "10G" "$vmname"
 
 # Create swap space
 lvcreate -L 500M -n swap $vmname
-mkswap -L swap /dev/$vmname/swap
+mkswap -f -L swap /dev/$vmname/swap
 
 # For debugging exit here.
 exit
