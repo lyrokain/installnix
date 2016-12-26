@@ -9,4 +9,4 @@ It will of corse repartition and format the disk of that machine. Make sure it d
 
 Remember to set your root and user passwords in the lower portion of the script.
 
-curl https://raw.githubusercontent.com/lyrokain/installnix/master/go.sh | sh
+curl https://raw.githubusercontent.com/lyrokain/installnix/master/go.sh | bash
