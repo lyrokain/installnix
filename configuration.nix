@@ -55,10 +55,10 @@
   # services.printing.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.$username = {
+  users.extraUsers.sunny = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQql8UmC+W+IF7fF2/3Bb9PreRsgjP3F4bnqRh+HkRb3saWPvipQ6onCPBS5BEcSKmiU052wYN+J0Pu4l77gNEOKx9EeG1SH1fdqJ07JvrQhnMZtRJO36cvX1b4ZgLXMgTKSEkaE4ZAYF077E+0g+dQ4yfFI3wqcvhqhn9wQZc25QJwM0yg8qdEnVX4eGenUVIFKeDAm3cCAW8Usd18GdRZilYQ+fEad/Wno6BSZ8kWY+6CWlh6/Dh60E3Q4G6rErBmRg8TmItoYDGuQhvaFeXi3+HXw8P+HNhjAK3IruXBhSiTKjQmnUe9mn39M1CH/nU4wUtSop7aMbl8p3KQbaj prometheus" ];
     };
 
