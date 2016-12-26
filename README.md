@@ -8,3 +8,5 @@ This is going to be an install script to automatically install a copy of NixOS. 
 It will of corse repartition and format the disk of that machine. Make sure it does not contain any data you might need again.
 
 Remember to set your root and user passwords in the lower portion of the script.
+
+curl https://raw.githubusercontent.com/lyrokain/installnix/master/go.sh | sh
