@@ -27,7 +27,7 @@
   #];
   # swapDevices = [ { device = "/dev/$vmname/swap"; } ];
 
-  networking.hostName = "machine1"; # Define your hostname.
+  networking.hostName = "claas2"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties.
@@ -59,7 +59,7 @@
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
-    # openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQql8UmC+W+IF7fF2/3Bb9PreRsgjP3F4bnqRh+HkRb3saWPvipQ6onCPBS5BEcSKmiU052wYN+J0Pu4l77gNEOKx9EeG1SH1fdqJ07JvrQhnMZtRJO36cvX1b4ZgLXMgTKSEkaE4ZAYF077E+0g+dQ4yfFI3wqcvhqhn9wQZc25QJwM0yg8qdEnVX4eGenUVIFKeDAm3cCAW8Usd18GdRZilYQ+fEad/Wno6BSZ8kWY+6CWlh6/Dh60E3Q4G6rErBmRg8TmItoYDGuQhvaFeXi3+HXw8P+HNhjAK3IruXBhSiTKjQmnUe9mn39M1CH/nU4wUtSop7aMbl8p3KQbaj prometheus" ];
+    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQql8UmC+W+IF7fF2/3Bb9PreRsgjP3F4bnqRh+HkRb3saWPvipQ6onCPBS5BEcSKmiU052wYN+J0Pu4l77gNEOKx9EeG1SH1fdqJ07JvrQhnMZtRJO36cvX1b4ZgLXMgTKSEkaE4ZAYF077E+0g+dQ4yfFI3wqcvhqhn9wQZc25QJwM0yg8qdEnVX4eGenUVIFKeDAm3cCAW8Usd18GdRZilYQ+fEad/Wno6BSZ8kWY+6CWlh6/Dh60E3Q4G6rErBmRg8TmItoYDGuQhvaFeXi3+HXw8P+HNhjAK3IruXBhSiTKjQmnUe9mn39M1CH/nU4wUtSop7aMbl8p3KQbaj prometheus" ];
     };
 
   # The NixOS release to be compatible with for stateful data such as databases.
