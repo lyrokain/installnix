@@ -29,10 +29,7 @@
 
   networking.hostName = "claas2"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  
-  # Enable Virtualbox Guest Extensions
-  virtualisation.virtualbox.guest.enable = true;
-  
+    
   # Disable fsck on startup
   boot.initrd.checkJournalingFS = false;
 
@@ -53,12 +50,11 @@
   ];
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services = {
+    virtualboxGuest.enable = true;      # Enable Virtualbox Guest Extensions
+    openssh.enable = true;              # Enable the OpenSSH daemon.
+    # printing.enable = true;           # Enable CUPS to print documents.
+  }
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.sunny = {
