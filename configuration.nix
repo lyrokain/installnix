@@ -29,6 +29,12 @@
 
   networking.hostName = "claas2"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  
+  # Enable Virtualbox Guest Extensions
+  virtualisation.virtualbox.guest.enable = true;
+  
+  # Disable fsck on startup
+  boot.initrd.checkJournalingFS = false;
 
   # Select internationalisation properties.
   i18n = {
